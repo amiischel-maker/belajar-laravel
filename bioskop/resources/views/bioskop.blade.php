@@ -96,7 +96,7 @@
 
     <h2>Aplikasi Kategori Usia Bioskop</h2>
 
-    <form action="{{ route('bioskop.proses') }}" method="POST">
+    <form action="/proses" method="POST">
         @csrf
 
         <label>Nama</label>
