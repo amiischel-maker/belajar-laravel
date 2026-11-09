@@ -1,9 +1,10 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\BioskopController;
+use App\Http\Controllers\SampleController;
 
-Route::get('/', [BioskopController::class, 'index']);
+Route::get('/tesusia', [SampleController::class, 'tesusia']);
 
-Route::post('/proses', [BioskopController::class, 'proses'])
-    ->name('bioskop.proses');
+Route::get('/usia', [SampleController::class, 'usia']);
+
+Route::get('/datausia', [SampleController::class, 'datausia']);

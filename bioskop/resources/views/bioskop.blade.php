@@ -18,12 +18,12 @@
         }
 
         .container {
-            max-width: 650px;
+            max-width: 700px;
             margin: auto;
             background: white;
             padding: 25px;
             border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.08);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         h2 {
@@ -42,17 +42,17 @@
             padding: 12px;
             margin-top: 7px;
             border: 1px solid #cbd5e1;
-            border-radius: 7px;
+            border-radius: 6px;
         }
 
         button {
             width: 100%;
+            padding: 13px;
             margin-top: 20px;
-            padding: 12px;
             background: #2563eb;
             color: white;
             border: none;
-            border-radius: 7px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 16px;
         }
@@ -63,19 +63,15 @@
 
         .hasil {
             margin-top: 25px;
-            padding: 18px;
+            padding: 15px;
             background: #eff6ff;
             border-radius: 8px;
-        }
-
-        .error {
-            color: red;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin-top: 25px;
+            margin-top: 15px;
         }
 
         th, td {
@@ -86,6 +82,11 @@
 
         th {
             background: #e2e8f0;
+        }
+
+        .error {
+            color: red;
+            font-size: 13px;
         }
     </style>
 </head>
@@ -108,91 +109,81 @@
             required
         >
 
+        @error('nama')
+            <p class="error">{{ $message }}</p>
+        @enderror
+
         <label>Tanggal Lahir</label>
         <input
             type="date"
-            name="tanggal_lahir"
-            value="{{ old('tanggal_lahir') }}"
+            name="tanggalLahir"
+            value="{{ old('tanggalLahir') }}"
             max="{{ date('Y-m-d') }}"
             required
         >
 
-        @if ($errors->any())
-            <div class="error">
-                @foreach ($errors->all() as $error)
-                    <p>{{ $error }}</p>
-                @endforeach
-            </div>
-        @endif
+        @error('tanggalLahir')
+            <p class="error">{{ $message }}</p>
+        @enderror
 
         <button type="submit">Proses Data</button>
     </form>
 
-    @isset($usia)
+    @if(isset($usia))
+        <div class="hasil">
+            <h3>Hasil Perhitungan</h3>
 
-    <div class="hasil">
-        <h3>Hasil Output</h3>
-
-        <p><strong>Nama:</strong> {{ $nama }}</p>
-
-        <p>
-            <strong>Tanggal Lahir:</strong>
-            {{ $tanggalLahir->format('d-m-Y') }}
-        </p>
-
-        <p><strong>Usia:</strong> {{ $usia }} Tahun</p>
-
-        <p><strong>Keterangan:</strong> {{ $keterangan }}</p>
-
-        <p><strong>Status:</strong> {{ $status }}</p>
-    </div>
-
-    @endisset
+            <p>Nama: {{ $nama }}</p>
+            <p>Tanggal Lahir: {{ $tanggalLahir->format('d-m-Y') }}</p>
+            <p>Usia: {{ $usia }} tahun</p>
+            <p>Keterangan: {{ $keterangan }}</p>
+            <p>Status: {{ $status }}</p>
+        </div>
+    @endif
 
     <h3>Ketentuan Kategori Usia</h3>
 
     <table>
-        <tr>
-            <th>Usia</th>
-            <th>Keterangan</th>
-            <th>Status</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>Usia</th>
+                <th>Keterangan</th>
+                <th>Status</th>
+            </tr>
+        </thead>
 
-        <tr>
-            <td>0-5</td>
-            <td>Balita</td>
-            <td>Tidak boleh masuk bioskop</td>
-        </tr>
-
-        <tr>
-            <td>6-12</td>
-            <td>Anak-anak</td>
-            <td>Tidak boleh masuk bioskop</td>
-        </tr>
-
-        <tr>
-            <td>13-17</td>
-            <td>Remaja</td>
-            <td>Tidak boleh masuk bioskop</td>
-        </tr>
-
-        <tr>
-            <td>18-44</td>
-            <td>Dewasa</td>
-            <td>Boleh masuk bioskop</td>
-        </tr>
-
-        <tr>
-            <td>45-60</td>
-            <td>Orang Tua</td>
-            <td>Boleh masuk bioskop</td>
-        </tr>
-
-        <tr>
-            <td>>60</td>
-            <td>Lansia</td>
-            <td>Boleh masuk bioskop</td>
-        </tr>
+        <tbody>
+            <tr>
+                <td>0-5</td>
+                <td>Balita</td>
+                <td>Tidak boleh masuk bioskop</td>
+            </tr>
+            <tr>
+                <td>6-12</td>
+                <td>Anak-anak</td>
+                <td>Tidak boleh masuk bioskop</td>
+            </tr>
+            <tr>
+                <td>13-17</td>
+                <td>Remaja</td>
+                <td>Tidak boleh masuk bioskop</td>
+            </tr>
+            <tr>
+                <td>18-44</td>
+                <td>Dewasa</td>
+                <td>Boleh masuk bioskop</td>
+            </tr>
+            <tr>
+                <td>45-60</td>
+                <td>Orang Tua</td>
+                <td>Boleh masuk bioskop</td>
+            </tr>
+            <tr>
+                <td>&gt;60</td>
+                <td>Lansia</td>
+                <td>Boleh masuk bioskop</td>
+            </tr>
+        </tbody>
     </table>
 
 </div>
